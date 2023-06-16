@@ -3,11 +3,20 @@ import 'package:toonflix/widgets/button.dart';
 import 'package:toonflix/widgets/currency_card.dart';
 
 void main() {
-  runApp(const App());
+  runApp(App());
 }
 
 class App extends StatelessWidget {
-  const App({super.key});
+  App({super.key});
+
+  final List currency = ['Euro', 'Bitcoin', 'Dollar'];
+  final List amount = ['6 428', '423', '55 627'];
+  final List code = ['EUR', 'BTC', 'USD'];
+  final List icon = [
+    Icons.euro_rounded,
+    Icons.currency_bitcoin_rounded,
+    Icons.attach_money_rounded
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -118,33 +127,15 @@ class App extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const currenyCard(
-                  name: 'Euro',
-                  code: 'EUR',
-                  amount: '6 428',
-                  icon: Icons.euro_rounded,
-                  isInverted: false,
-                ),
-                Transform.translate(
-                  offset: const Offset(0, -20),
-                  child: const currenyCard(
-                    name: 'Bitcoin',
-                    code: 'BTC',
-                    amount: '9 222',
-                    icon: Icons.currency_bitcoin_rounded,
-                    isInverted: true,
-                  ),
-                ),
-                Transform.translate(
-                  offset: const Offset(0, -40),
-                  child: const currenyCard(
-                    name: 'Dollar',
-                    code: 'USD',
-                    amount: '428',
-                    icon: Icons.attach_money_rounded,
-                    isInverted: false,
-                  ),
-                ),
+                for (int i = 0; i < currency.length; i++)
+                  currenyCard(
+                    name: currency[i],
+                    code: code[i],
+                    amount: amount[i],
+                    icon: icon[i],
+                    isInverted: (i + 1) % 2 == 0 ? true : false,
+                    order: i,
+                  )
               ],
             ),
           ),
